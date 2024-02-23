@@ -1,240 +1,240 @@
-# Burger Queen - API con Node.js
+# Burger Queen - API com Node.js
 
 ## Índice
 
-* [1. Preámbulo](#1-pre%C3%A1mbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptaci%C3%B3n-m%C3%ADnimos-del-proyecto)
-* [6. Hacker (Devops) Edition con Docker](#6-hacker-%28devops%29-edition-con-docker)
-* [7. Pistas, tips y lecturas complementarias](#7-pistas-tips-y-lecturas-complementarias)
+* [1. Prefácio](#1-prefácio)
+* [2. Resumo do projeto](#2-resumo-do-projeto)
+* [3. Objetivos de aprendizagem](#3-objetivos-de-aprendizagem)
+* [4. Considerações gerais](#4-considerações-gerais)
+* [5. Critérios de aceitação mínimos do projeto](#5-critérios-de-aceitação-mínimos-do-projeto)
+* [6. Hacker (Devops) Edition con Docker](#6-edição-hacker-devops-com-docker)
+* [7. Pistas, tips e leituras complementares](#7-pistas-tips-e-leituras-complementares)
 
-## 1. Preámbulo
+## 1. Prefácio
 
 ![Node.js logo](https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg)
 
-Un pequeño restaurante de hamburguesas, que está creciendo, necesita un
-sistema a través del cual puedan tomar pedidos usando una _tablet_, y enviarlos
-a la cocina para que se preparen ordenada y eficientemente.
+Um pequeno restaurante de hamburgueres, que está crescendo, necessita de um
+sistema para realizar pedidos usando um _tablet_, e que os enviem à
+cozinha para que sejam preparados de forma ordenada e eficiente.
 
-Este proyecto tiene dos áreas: interfaz web (cliente) y API (servidor). Nuestra
-clienta nos ha solicitado desarrollar la API que se puede integrar con la
-interfaz, que otro equipo de desarrolladoras está trabajando simultáneamente.
+Este projeto tem duas áreas: interface (cliente) e API (servidor). Nosso
+cliente nos solicitou que desenvolvêssemos uma API que pode integrar com a
+interface, que outra equipe de desenvolvedores está trabalhando
+simultaneamente
 
-## 2. Resumen del proyecto
+## 2. Resumo do projeto
 
-Con una API en este caso nos referimos a un _servidor web_, que es
-básicamente un programa que _escucha_ en un puerto de red, a través del cual
-podemos enviarle _consultas_ (_request_) y obtener _respuestas_ (_response_)
-usando el protocolo HTTP (o HTTPS).
+Como API, nesse caso nos referimos a um _servidor web_, que é basicamente
+um programa que _ouve_ o que acontece na aplicação através de uma porta de rede,
+pela qual podemos enviar _requisições_ (_requests_) e obter _respostas_ (_responses_)
+usando o protocolo HTTP (o HTTPS).
 
-Un servidor web debe _manejar_ consultas entrantes y producir respuestas a esas
-consultas que serán enviadas de vuelta al _cliente_. Cuando hablamos de
-_aplicaciones de servidor_, esto implica una arquitectura de _cliente/servidor_,
-donde el cliente es un programa que hace consultas a través de una red (por
-ejemplo el navegador, cURL, etc.), y el _servidor_ es el programa que recibe
-estas consultas y las responde.
+Um servidor web deve _lidar_ com as requisições que chegam e devolver respostas,
+que serão enviadas de volta ao _cliente_. Quando falamos de _aplicações de servidor_,
+isso implica uma arquitetura de _cliente/servidor_, onde o cliente é um programa
+que faz requisições através de uma rede (por exemplo o navegador, o cURL, etc)
+e o servidor é o programa que recebe essas requisições e as responde.
 
-[Node.js](https://nodejs.org/) nos permite crear servidores web súper eficientes
-de manera relativamente simple y todo esto usando JavaScript!
+O [Node.js](https://nodejs.org/) nos permite criar servidores web super eficientes
+de maneira relativamente simples, tudo isso usando JavaScript!
 
-En este proyecto partimos de un _boilerplate_ que ya contiene una serie de
-_endpoints_ (puntos de conexión o URLs) y nos piden completar la aplicación.
-Esto implica que tendremos que partir por leer la implementación existente, y
-familiarizarnos con el _stack_ elegido ([Node.js](https://nodejs.org/) y
-[Express](https://expressjs.com/)) y complementarlo con un motor de bases de
-datos. Recomendamos el uso de [MongoDB](https://www.mongodb.com/) y tenemos una
-[guía para empezar con MongoDB](./guides/GETTING-STARTED-MONGODB.md).
+Neste projeto partimos de um _boilerplate_ que já contém uma série de
+_endpoints_ (pontos de conexão ou URLs) e nos pedem para completar a aplicação.
+Isso implica que teremos que começar lendo a implementação existente e nos
+familiarizar com o _stack_ escolhido ([Node.js](https://nodejs.org/) e
+[Express](https://expressjs.com/)), além de complementá-lo com um motor de
+banco de dados. Recomendamos o uso do [MongoDB](https://www.mongodb.com/)
+e temos [um guia para começar com o MongoDB.](./guides/GETTING-STARTED-MONGODB.pt.md)
 
-La clienta nos ha dado un [link a la documentación](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/3.0.0)
-que especifica el comportamiento esperado de la API que expondremos por
-HTTP. Ahí puedes encontrar todos los detalles de qué _endpoints_ debe
-implementar la aplicación, qué parámetros esperan, qué deben responder, etc.
+[MongoDB](https://www.mongodb.com/),
+[PostgreSQL](https://www.postgresql.org/) e [MySQL](https://www.mysql.com/).
 
-El objetivo principal de aprendizaje es adquirir experiencia con **Node.js**
-como herramienta para desarrollar _aplicaciones de servidor_, junto con una
-serie de herramientas comunes usadas en este tipo de contexto (Express como
-framework, MongoDB como base datos, etc).
+O cliente nos deu um
+[link](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/3.0.0)
+para a documentação que especifica o comportamento esperado da API que
+iremos expor por HTTP.
+Lá podemos encontrar todos os detalhes que os _endpoints_ deve
+implementar na aplicação, que parâmetros esperam, o que devem responder, etc.
 
-En este proyecto tendrás que construir un servidor web que debe _servir_ `JSON`
-sobre `HTTP`, y desplegarlo en un servidor en la nube.
+O objetivo de aprendizagem principal é adquirir experiência com o **Node.js**
+como ferramenta para desenvolvimento de _aplicações de servidor_, junto com uma série
+de outras ferramentas comumente utilizadas nesse contexto (Express como
+framework, MongoDB como base de dados, etc.).
 
-Para completar el proyecto tendrás que familiarizarte con conceptos como
-**rutas** (_routes_), **URLs**, **HTTP** y **REST** (verbs, request, response,
-headers, body, status codes...), **JSON**, **JWT** (_JSON Web Tokens_),
-**conexión con una base datos** (`MongoDB`),
-**variables de entorno**, **deployment**, etc.
+Neste projeto, você desenvolverá um servidor web que deverá _servir_ `JSON`
+através de uma conexão `HTTP`, e implantá-lo em um servidor na nuvem.
 
-## 3. Objetivos de aprendizaje
+Ao final do projeto, você deverá estar familiarizada com conceitos como **rotas**
+(_routes_), **URLs**, **HTTP** (verbos, request, response, headers, body, status
+codes, etc), **JSON**, **JWT** (_JSON Web Tokens_), **conexão com uma base de dados**
+(`MongoDB`), **variables de ambiente**, **deployment**, etc.
 
-> ℹ️ Esta sección será automáticamente generada en el idioma pertinente, a partir
-> de los objetivos de aprendizaje declarados en [`project.yml`](./project.yml),
-> al crear el repo del proyecto para un cohort en particular usando
+## 3. Objetivos de aprendizagem
+
+> ℹ️ Esta seção será automaticamente gerada no idioma pertinente, a partir dos
+> objetivos de aprendizagem declarados em [`project.yml`](./project.yml), ao
+> criar o repositório do projeto para uma coorte em particular usando
 > [`./scripts/create-cohort-project.js`](../../scripts#create-cohort-project-coaches).
 >
-> Acá puedes ver una [lista de todos los objetivos de aprendizaje](../../learning-objectives/data.yml)
-> que contempla nuestra currícula.
+> Aqui você pode ver uma [lista de todos os objetivos de aprendizagem](../../learning-objectives/data.yml)
+> cobertos em nosso currículo.
 
-## 4. Consideraciones generales
+## 4. Considerações gerais
 
-Este proyecto se realizará en duplas y podrá integrarse con el proyecto
+Este projeto será realizado em duplas e pode estar integrado com o projeto
 [Burger Queen API client](../04-burger-queen-api-client)
-que desarrolle simultáneamente el equipo de Frontend developers de tu squad.
+que a equipe de Frontend developers do seu squad desenvolve simultaneamente.
 
-La lógica del proyecto debe estar implementada completamente en JavaScript.
-En este proyecto está permitido usar librerías o frameworks, asi como
-extensiones al lenguaje con `babel` (caso en el cual deberás incluir un
-comando `npm run build`).
+A lógica do projeto deve estar implementada totalmente em JavaScript (ES6).
+Neste projeto está permitido usar bibliotecas ou frameworks, assim como
+extensões para a linguagem com `babel` (neste caso você incluir um
+comando `npm build`).
 
-Los tests deben cubrir un mínimo del 90% de _statements_, _functions_,
-_lines_ y _branches_. Si bien el boilerplate no incluye la configuración para
-pruebas unitarias, estas son obligatorias.
+Os testes deven cobrir um mínimo de 90% de _statements_, _functions_,
+_lines_ e _branches_. Embora o boilerplate não inclua as configurações para
+testes unitários, estes são obrigatórios.
 
-Otro requerimiento del equipo de QA de nuestra clienta es realizar
-**pruebas _end-to-end_**, que usaremos para verificar el comportamiento desde el
-punto de vista de HTTP, desde afuera del servidor. Estos tests, a diferencia de
-las pruebas unitarias, no prueban cada pieza por separado sino que prueban la
-aplicación completa, de principio a fin. Estas pruebas, al no hacer uso directo
-del código fuente de la aplicación, pueden ejecutarse directamente sobre una URL
-remota, ya que la interfaz sometida a pruebas es HTTP.
+Outro requisito da equipe de QA do nosso cliente é realizar
+**testes _end-to-end_**, que usaremos para verificar o comportamento desde o
+ponto de vista de HTTP, desde fora do servidor. Estes testes, diferente dos
+testes unitarios, não testam cada parte separadamente, mas testam a
+aplicação completa, do princípio ao fim. Esses testes, por não fazerem uso direto
+do código-fonte da aplicação, podem ser executados diretamente em uma URL
+remota, pois a interface em teste é HTTP.
 
-El _boilerplate_ ya contiene el setup y configuración
-necesaria para ejecutar todos los tests _end-to-end_ con el comando `npm run test:e2e`.
+O _boilerplate_ já contém o setup e configuração
+necessária para executar todos os tests _end-to-end_ com o comando `npm run test:e2e`.
 
 ```sh
-# Corre pruebas e2e sobre instancia local. Esto levanta la aplicación con npm
-# start y corre los tests contra la URL de esta instancia (por defecto
+# Execute testes e2e na instância local. Isso levanta a aplicação com npm
+# start e execute os tests na URL desta instancia (por padrão
 # http://127.0.0.1:8080).
 npm run test:e2e
 
-# Corre pruebas e2e sobre URL remota
-REMOTE_URL=<TODO: poner URL> npm run test:e2e
+# Execute testes e2e em URL remoto
+REMOTE_URL=<TODO: colocar URL> npm run test:e2e
 ```
 
-Las pruebas _end-to-end_ ya están completas en el _boilerplate_, así que puedes
-usarlas como guía de implementación y checklist de completitud.
+Os testes _end-to-end_ já estão concluidos no _boilerplate_, então pode
+usá-los como um guia de implementação e lista de verificação de integridade.
 
-## 5. Criterios de aceptación mínimos del proyecto
+## 5. Critérios de aceitação mínimos do projeto
 
 ### 5.1 API
 
-La API debe exponer los servicios de la
-[documentación](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/3.0.0)
-entregada por nuestra clienta.
+A API deve expor os serviços da
+[documentação](https://app.swaggerhub.com/apis-docs/ssinuco/BurgerQueenAPI/3.0.0)
+fornecida pela nossa cliente.
 
 ### 5.2 CLI
 
-La clienta nos ha solicitado que la aplicación cuente un comando **`npm start`**
-que se debe encargar de ejecutar nuestra aplicación node y que además pueda
-recibir información de configuración, como el puerto en el que escuchar, a qué
-base datos conectarse, etc. Estos datos de configuración serán distintos entre
-diferentes entornos (desarrollo, producción, etc.). El _boilerplate_ ya
-implementa [el código necesario](config.js) para leer esta información de los
-[argumentos de invocación](https://nodejs.org/docs/latest/api/process.html#process_process_argv)
-y el
-[entorno](https://nodejs.org/docs/latest/api/process.html#process_process_env).
+O cliente solicitou que a aplicação tenha um comando **`npm start`**
+que deve ser responsável por executar nossa aplicação node e que também possa
+receber informações de configuração, como a porta a ser escutada, qual
+banco de dados conectar, etc. Esses dados de configuração serão distintos entre os
+diferentes ambientes (desenvolvimento, produção, ...). O _boilerplate_ já implementa
+[o código necessário](config.js) para ler esta informação dos
+[argumentos de invocação](https://nodejs.org/docs/latest/api/process.html#process_process_argv)
+e o
+[ambiente](https://nodejs.org/docs/latest/api/process.html#process_process_env).
 
-#### 5.2.1 Argumentos de línea de comando
+#### 5.2.1 Argumentos de linha de comando
 
-Podemos especificar el puerto en el que debe arrancar la aplicación pasando un
-argumento a la hora de invocar nuestro programa:
+Podemos especificar a porta onde a aplicação deve iniciar, passando um argumento
+ao invocar nosso programa:
 
 ```sh
-# Arranca la aplicación el puerto 8888 usando npm
+# Inicia a aplicação na porta 8888 usando npm
 npm start 8888
 ```
 
-#### 5.2.2 Variables de entorno
+#### 5.2.2 Variáveis de ambiente
 
-Nuestra aplicación usa las siguientes variables de entorno:
+Nossa aplicação usa as seguintes variáveis de ambiente:
 
-* `PORT`: Si no se ha especificado un puerto como argumento de línea de comando,
-  podemos usar la variable de entorno `PORT` para especificar el puerto. Valor
-  por defecto `8080`.
-* `DB_URL`: El _string_ de conexión de _MongoDB_. Cuando ejecutemos la
-  aplicación en nuestra computadora (en entorno de desarrollo), podemos usar el
-  una base de datos local, pero en producción deberemos utilizar las instancias
-  configuradas con `docker-compose` (mas sobre esto en la siguiente sección de
-  **Deployment**)
-* `JWT_SECRET`: Nuestra aplicación implementa autenticación usando JWT (JSON
-  Web Tokens). Para poder firmar (cifrar) y verificar (descifrar) los tokens,
-  nuestra aplicación necesita un secreto. En local puedes usar el valor por
-  defecto (`xxxxxxxx`), pero es muy importante que uses un _secreto_ de verdad
-  en producción.
-* `ADMIN_EMAIL`: Opcionalmente podemos especificar un email y password para
-  el usuario admin (root). Si estos detalles están presentes la aplicación se
-  asegurará que exista el usuario y que tenga permisos de administrador. Valor
-  por defecto `admin@localhost`.
-* `ADMIN_PASSWORD`: Si hemos especificado un `ADMIN_EMAIL`, debemos pasar
-  también una contraseña para el usuario admin. Valor por defecto: `changeme`.
+* `PORT`: Se nenhuma porta for especificada como argumento da linha de comando
+  podemos usar a variable de ambiente `PORT` para especificar a porta. Valor
+  por padrão `8080`.
+* `DB_URL`: A _string_ de conexão de _MongoDB_, _PostgreSQL_ ou _MySQL_. Quando
+  executemos a aplicação em nosso computador (em ambiente de desenvolvimento),
+  podemos usar um banco de dados local, mas em produção deveremos usar as
+  instâncias configuradas com `docker-compose` (mais sobre isso na seção de
+  **Deployment**).
+* `JWT_SECRET`: Nossa aplicação implementa autenticação usando JWT (JSON
+   Web Tokens). Para assinar (criptografar) e verificar (descriptografar) os tokens,
+  nossa aplicação precisa de um segredo. Localmente, pode usar o valor
+  padrão (`xxxxxxxx`), mas é muito importante usar um _segredo_ real
+  na producção.
+* `ADMIN_EMAIL`: Opcionalmente podemos especificar um email e password para
+  o usuario admin (root). Se esses detalhes estiverem presentes, a aplicação se
+  certificará que exista o usuário e que tenha permissões de administrador. Valor
+  por padrão `admin@localhost`.
+* `ADMIN_PASSWORD`: Se for especificado um `ADMIN_EMAIL`, devemos passar
+  também uma senha para o usuário admin. Valor por padrão: `changeme`.
 
-### 5.3 Despliegue (Deployment)
+### 5.3 Implantação (Deployment)
 
-Puedes elegir el proveedor (o proveedores) que prefieras junto
-con el mecanismo de despliegue y estrategia de alojamiento. Te recomendamos
-explorar las siguientes opciones:
+Você pode escolher o provedor (ou provedores) que preferir,
+juntamente com o mecanismo de implantação e estratégia de hospedagem.
+Recomendamos que você explore as seguintes opções:
 
-* [Vercel](https://vercel.com/) es una opción enfocada
-  a aplicaciones web estáticas (como las que se construyen con React). Sin embargo,
-  Vercel también nos permite desplegar aplicaciones node usando [Serverless
-  Functions](https://vercel.com/docs/serverless-functions/introduction).
-* [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-  es una muy buena opción para alojar nuestra base datos de producción, la cuál
-  podemos usar en conjunción con cualquiera de las opciones mencionadas arriba.
+* [Vercel](https://vercel.com/) é uma opção focada em aplicativos
+da web estáticos (como os construídos com React). No entanto,
+o Vercel também nos permite implantar aplicativos node usando
+[Serverless Functions](https://vercel.com/docs/serverless-functions/introduction)
+[MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+é uma ótima opção para hospedar nosso banco de dados de produção,
+que pode ser usado em conjunto com qualquer uma das opções mencionadas acima.
 
-Si tienes dudas sobre las diferentes (y múltiples) opciones de despliegue no
-dudes en consultar con tus pares y tus coaches.
+Se tiver dúvidas sobre as diferentes opções de implantação (que são várias),
+não hesite em consultar seus colegas e seus coaches.
 
-### 6. Hacker (Devops) Edition con Docker
+## 6. Edição Hacker (DevOps) com Docker
 
-Nuestra clienta nos ha manifestado que su equipo de _devops_ está siempre con
-muchas tareas, por lo que nos pide como requerimiento que la aplicación esté
-configurada con `docker-compose` para que pueda ser desplegada sin dificultades
-en cualquier entorno.
+Nossa cliente nos informou que sua equipe de DevOps está sempre
+ocupada com muitas tarefas, portanto, ela nos pede como requisito que
+o aplicativo seja configurado com `docker-compose` para que possa ser
+implantado facilmente em qualquer ambiente.
 
-El _boilerplate_ ya cuenta con una configuración inicial de `docker-compose` para
-la aplicación de node, tu tarea será extender esa configuración para incluir
-la configuración de base de datos. Ten en cuenta que como vas a tener dos
-servidores corriendo sobre una misma configuración, deberás exponer
-los servicios en diferentes puertos.
+O boilerplate já possui uma configuração inicial de `docker-compose`
+para o aplicativo Node.js, sua tarefa será estender essa configuração para
+incluir a configuração do banco de dados. Tenha em mente que,
+como você terá dois servidores sendo executados na mesma configuração,
+você precisará expor os serviços em portas diferentes.
 
-Lee la [**guía para docker**](./guides/GETTING-STARTED-DOCKER.md)
-incluido en el proyecto para mas información.
+Leia o [guia para docker](./guides/GETTING-STARTED-DOCKER.pt.md) incluído
+no projeto para mais informações.
 
-Para probar tu configuración de docker, te recomendamos usar `docker-compose`
-localmente (en tu computadora) para ejecutar la aplicación junto
-con la base de datos.
+Para testar sua configuração do Docker, recomendamos que você use o
+`docker-compose` localmente (em seu computador) para executar o
+aplicativo junto com o banco de dados.
 
-Con respecto al despliegue, puedes elegir el proveedor (o proveedores)
-que prefieras junto con el mecanismo de despliegue y estrategia de alojamiento.
-Te recomendamos explorar las siguientes opciones:
+Quanto à implantação, você pode escolher o provedor (ou provedores)
+que preferir, juntamente com o mecanismo de implantação e estratégia
+de hospedagem. Recomendamos que você explore as seguintes opções:
 
-* Si quieres explorar opciones más personalizadas y ver docker del lado del
-  servidor puedes considerar proveedores como
-  [AWS (Amazon Web Services)](https://aws.amazon.com/) o
-  [GCP (Google Cloud Platform)](https://cloud.google.com/), ambos tienen algún
-  tipo de _free tier_ así como tanto _instancias_ de _servidores virtuales_
-  (VPS) donde configurar nuestro propio Docker o servicios para desplegar
-  aplicaciones en contenedores (por ejemplo [Compute Engine](https://cloud.google.com/compute/docs/containers)
-  de GCP o [Elastic Container Service](https://aws.amazon.com/ecs/) de AWS).
+* Se quiser explorar opções mais personalizadas e ver o docker do lado do
+servidor, pode considerar provedores como
+[AWS (Amazon Web Services)](https://aws.amazon.com/) ou
+[GCP (Google Cloud Platform)](https://cloud.google.com/), ambos possuem algum tipo
+de serviço experimental gratuito (_free tier_) assim como instâncias de servidores
+virtuais (VPS), onde configuramos nosso próprio Docker ou serviços para implantar
+aplicações em contêineres (por exemplo [Compute Engine](https://cloud.google.com/compute/docs/containers)
+de GCP ou [Elastic Container Service](https://aws.amazon.com/ecs/) de AWS).
 
-## 7. Pistas, tips y lecturas complementarias
+## 7. Pistas, tips e leituras complementares
 
-### Primeros pasos
-
-> :information_source: Antes de comenzar a programar te recomendamos leer y
-> seguir con detenimiento la [**guía de _primeros pasos_**](./guides/GETTING-STARTED-MONGODB.md)
-> para ayudarte con el stack recomendado y configurar tu entorno de desarrollo.
-
-### Otros recursos
+:information_source: Antes de começar a programar, recomendamos
+que você leia e siga cuidadosamente o
+[**guia de _primeiros passos_**](./guides/GETTING-STARTED-MONGODB.pt.md)
+para ajudá-lo com o stack recomendado e configurar seu ambiente de desenvolvimento.
 
 * [Express](https://expressjs.com/)
 * [MongoDB](https://www.mongodb.com/)
 * [MongoDB Node Driver](https://www.mongodb.com/docs/drivers/node/current/)
 * [docker](https://docs.docker.com/)
 * [docker compose](https://docs.docker.com/compose/)
-* [¿Qué es Docker? | Curso de Docker | Platzi Cursos](https://youtu.be/hQgvt-s-AHQ)
 * [Postman](https://www.getpostman.com)
-* [Variable de entorno - Wikipedia](https://es.wikipedia.org/wiki/Variable_de_entorno)
+* [Variável de ambiente - Wikipedia](https://pt.wikipedia.org/wiki/Variável_de_ambiente)
 * [`process.env` - Node.js docs](https://nodejs.org/api/process.html#process_process_env)
