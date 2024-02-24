@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const config = require('./config');
 const authMiddleware = require('./middleware/auth');
 const errorHandler = require('./middleware/error');
@@ -9,6 +10,7 @@ const { connect } = require('./connect');
 const { port, secret } = config;
 const app = express();
 
+app.use(cors());
 app.set('config', config);
 app.set('pkg', pkg);
 
