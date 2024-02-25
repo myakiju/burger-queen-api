@@ -4,6 +4,7 @@ const authMiddleware = require('./middleware/auth');
 const errorHandler = require('./middleware/error');
 const routes = require('./routes');
 const pkg = require('./package.json');
+const { connect } = require('./connect');
 
 const { port, secret } = config;
 const app = express();
@@ -11,12 +12,12 @@ const app = express();
 app.set('config', config);
 app.set('pkg', pkg);
 
-// parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(authMiddleware(secret));
 
-// Registrar rutas
+connect();
+
 routes(app, (err) => {
   if (err) {
     throw err;
