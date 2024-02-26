@@ -8,9 +8,14 @@ const {
 const {
   getUsers,
   createUser,
+  getUserById,
+  updateUser,
+  deleteUser,
 } = require('../controller/users');
 
-const initAdminUser = (app, next) => {
+const { User: UserModel } = require('../model/User');
+
+const initAdminUser = async (app, next) => {
   const { adminEmail, adminPassword } = app.get('config');
   if (!adminEmail || !adminPassword) {
     return next();
@@ -19,12 +24,14 @@ const initAdminUser = (app, next) => {
   const adminUser = {
     email: adminEmail,
     password: bcrypt.hashSync(adminPassword, 10),
-    roles: { admin: true },
+    role: 'admin',
   };
 
-  // TODO: Create admin user
-  // First, check if adminUser already exists in the database
-  // If it doesn't exist, it needs to be saved
+  // const user = await UserModel.findOne({ email: adminEmail });
+
+  // if (user) next(422);
+
+  // await UserModel.create(adminUser);
 
   next();
 };
@@ -63,8 +70,7 @@ module.exports = (app, next) => {
    * @code {403} if the user is not an admin or the same user
    * @code {404} if the requested user does not exist
    */
-  app.get('/users/:uid', requireAuth, (req, resp) => {
-  });
+  app.get('/users/:uid', requireAuth, getUserById);
 
   /**
    * @name POST /users
@@ -107,8 +113,7 @@ module.exports = (app, next) => {
    * @code {403} if a non-admin user tries to modify their `roles`
    * @code {404} if the requested user does not exist
    */
-  app.put('/users/:uid', requireAuth, (req, resp, next) => {
-  });
+  app.put('/users/:uid', requireAuth, updateUser);
 
   /**
    * @name DELETE /users/:uid
@@ -125,8 +130,7 @@ module.exports = (app, next) => {
    * @code {403} if the user is not an admin or the same user
    * @code {404} if the requested user does not exist
    */
-  app.delete('/users/:uid', requireAuth, (req, resp, next) => {
-  });
+  app.delete('/users/:uid', requireAuth, deleteUser);
 
   initAdminUser(app, next);
 };
