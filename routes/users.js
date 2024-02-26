@@ -27,13 +27,15 @@ const initAdminUser = async (app, next) => {
     role: 'admin',
   };
 
-  // const user = await UserModel.findOne({ email: adminEmail });
+  try {
+    const user = await UserModel.findOne({ email: adminEmail });
 
-  // if (user) next(422);
+    if (user) next();
 
-  // await UserModel.create(adminUser);
-
-  next();
+    await UserModel.create(adminUser);
+  } catch (error) {
+    next(error);
+  }
 };
 
 /** @module users */
