@@ -3,6 +3,14 @@ const {
   requireAdmin,
 } = require('../middleware/auth');
 
+const {
+  getProducts,
+  createProduct,
+  getProductById,
+  updateProduct,
+  deleteProduct,
+} = require('../controller/products');
+
 /** @module products */
 module.exports = (app, nextMain) => {
   /**
@@ -22,8 +30,7 @@ module.exports = (app, nextMain) => {
    * @code {200} if authentication is successful
    * @code {401} if there is no authentication header
    */
-  app.get('/products', requireAuth, (req, resp, next) => {
-  });
+  app.get('/products', requireAuth, getProducts);
 
   /**
    * @name GET /products/:productId
@@ -42,8 +49,7 @@ module.exports = (app, nextMain) => {
    * @code {401} if there is no authentication header
    * @code {404} if the product with the specified `productId` does not exist
    */
-  app.get('/products/:productId', requireAuth, (req, resp, next) => {
-  });
+  app.get('/products/:productId', requireAuth, getProductById);
 
   /**
    * @name POST /products
@@ -67,8 +73,7 @@ module.exports = (app, nextMain) => {
    * @code {403} if the user is not an admin
    * @code {404} if the product with the specified `productId` does not exist
    */
-  app.post('/products', requireAdmin, (req, resp, next) => {
-  });
+  app.post('/products', requireAdmin, createProduct);
 
   /**
    * @name PUT /products/:productId
@@ -93,8 +98,7 @@ module.exports = (app, nextMain) => {
    * @code {403} if the user is not an admin
    * @code {404} if the product with the specified `productId` does not exist
    */
-  app.put('/products/:productId', requireAdmin, (req, resp, next) => {
-  });
+  app.put('/products/:productId', requireAdmin, updateProduct);
 
   /**
    * @name DELETE /products/:productId
@@ -114,8 +118,7 @@ module.exports = (app, nextMain) => {
    * @code {403} if the user is not an admin
    * @code {404} if the product with the specified `productId` does not exist
    */
-  app.delete('/products/:productId', requireAdmin, (req, resp, next) => {
-  });
+  app.delete('/products/:productId', requireAdmin, deleteProduct);
 
   nextMain();
 };
