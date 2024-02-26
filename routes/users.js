@@ -95,7 +95,7 @@ module.exports = (app, next) => {
    * @body {String} password Password
    * @body {Object} [roles]
    * @body {Boolean} [roles.admin]
-   * @auth Requires authentication `token` and the user to be an **admin** or the user being modified
+   * @auth Requires authentication `token` and user to be an **admin** or the user being modified
    * @response {Object} user
    * @response {String} user.id
    * @response {Object} user.email
