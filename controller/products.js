@@ -3,7 +3,7 @@ const { Product: PoductModel } = require('../model/Product');
 module.exports = {
   getProducts: async (_, resp, next) => {
     try {
-      const products = await PoductModel.find();
+      const products = await PoductModel.find({}, '_id name price image type createdAt');
       resp.json(products);
     } catch (error) {
       next(error);
@@ -12,9 +12,9 @@ module.exports = {
   getProductById: async (req, resp, next) => {
     try {
       const { productId } = req.params;
-      const product = await PoductModel.findById(productId);
+      const product = await PoductModel.findById(productId, '_id name price image type createdAt');
 
-      if (!product) resp.status(404).json({ message: 'Produto não encontrado.' });
+      if (!product) resp.status(404).json({ error: 'Produto não encontrado.' });
       resp.json(product);
     } catch (error) {
       next(error);
@@ -35,14 +35,15 @@ module.exports = {
       if (!type) resp.status(422).json({ message: 'O tipo não é obrigatório.' });
 
       const productExists = await PoductModel.findOne({ name });
+      if (productExists) resp.status(422).json({ error: 'Produto já cadastrado.' });
 
-      if (productExists) resp.status(422).json({ message: 'Produto já cadastrado.' });
-
-      const response = await PoductModel.create({
+      const { _id, createdAt } = await PoductModel.create({
         name, price, image, type,
       });
 
-      resp.status(201).json({ response, message: 'Produto criado com sucesso' });
+      resp.status(201).json({
+        _id, name, price, image, type, createdAt,
+      });
     } catch (error) {
       next(error);
     }
@@ -64,9 +65,11 @@ module.exports = {
         type,
       });
 
-      if (!product) resp.status(404).json({ message: 'Produto não encontrado.' });
+      if (!product) resp.status(404).json({ error: 'Produto não encontrado.' });
 
-      resp.status(200).json({ message: 'Produto atualizado com sucesso', product });
+      const updatedProduct = await PoductModel.findById(productId, '_id name price image type createdAt');
+
+      resp.status(200).json(updatedProduct);
     } catch (error) {
       next(error);
     }
@@ -76,10 +79,15 @@ module.exports = {
       const { productId } = req.params;
       const user = await PoductModel.findById(productId);
 
-      if (!user) resp.status(404).json({ message: 'Produto não encontrado.' });
+      if (!user) resp.status(404).json({ error: 'Produto não encontrado.' });
 
-      const deletedProduct = await PoductModel.findByIdAndDelete(productId);
-      resp.status(200).json({ message: 'Produto deletado com sucesso', product: deletedProduct });
+      const {
+        _id, name, price, image, type, createdAt,
+      } = await PoductModel.findByIdAndDelete(productId);
+
+      resp.status(200).json({
+        _id, name, price, image, type, createdAt,
+      });
     } catch (error) {
       next(error);
     }
