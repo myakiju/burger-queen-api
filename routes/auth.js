@@ -26,16 +26,20 @@ module.exports = (app, nextMain) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return next(400);
+      return resp.status(400).json({ error: 'É necessário informar email e senha.' });
     }
 
     const user = await UserModel.findOne({ email });
 
-    if (!user) resp.status(404).json({ message: 'Usuário não encontrado.' });
+    if (!user) {
+      return resp.status(404).json({ error: 'Usuário não encontrado.' });
+    }
 
     const checkPassword = await bcrypt.compare(password, user.password);
 
-    if (!checkPassword) resp.status(422).json({ message: 'Senha inválida.' });
+    if (!checkPassword) {
+      return resp.status(404).json({ error: 'Senha inválida.' });
+    }
 
     try {
       const token = jwt.sign(
@@ -48,13 +52,8 @@ module.exports = (app, nextMain) => {
 
       resp.status(200).json({ message: 'Autenticação realizada com sucesso.', accessToken: token, user: { id: user._id, email: user.email, role: user.role } });
     } catch (error) {
-      resp.status(500).json({ message: 'Aconteceu um erro no servidor, tente novamente mais tarde!' });
+      next(error);
     }
-
-    // TODO: Authenticate the user
-    // It is necessary to confirm if the email and password
-    // match a user in the database
-    // If they match, send an access token created with JWT
 
     next();
   });

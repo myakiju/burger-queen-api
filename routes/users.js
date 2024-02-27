@@ -30,12 +30,16 @@ const initAdminUser = async (app, next) => {
   try {
     const user = await UserModel.findOne({ email: adminEmail });
 
-    if (user) next();
+    if (user) {
+      return next();
+    }
 
     await UserModel.create(adminUser);
   } catch (error) {
     next(error);
   }
+
+  next();
 };
 
 /** @module users */
