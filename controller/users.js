@@ -2,15 +2,15 @@ const bcrypt = require('bcrypt');
 const { User: UserModel } = require('../model/User');
 
 module.exports = {
-  getUsers: async (_, resp) => {
+  getUsers: async (_, resp, next) => {
     try {
       const users = await UserModel.find();
       resp.json(users);
     } catch (error) {
-      resp.status(500).json({ message: 'Aconteceu um erro no servidor, tente novamente mais tarde!' });
+      next(error);
     }
   },
-  getUserById: async (req, resp) => {
+  getUserById: async (req, resp, next) => {
     try {
       const { uid } = req.params;
       const user = await UserModel.findById(uid);
@@ -18,10 +18,10 @@ module.exports = {
       if (!user) resp.status(404).json({ message: 'Usuário não encontrado.' });
       resp.json(user);
     } catch (error) {
-      resp.status(500).json({ message: 'Aconteceu um erro no servidor, tente novamente mais tarde!' });
+      next(error);
     }
   },
-  createUser: async (req, resp) => {
+  createUser: async (req, resp, next) => {
     try {
       const roles = ['admin', 'chef', 'waiter'];
       const { email, password, role } = req.body;
@@ -42,10 +42,10 @@ module.exports = {
 
       resp.status(201).json({ response, message: 'Usuário criado com sucesso' });
     } catch (error) {
-      resp.status(500).json({ message: 'Aconteceu um erro no servidor, tente novamente mais tarde!' });
+      next(error);
     }
   },
-  updateUser: async (req, resp) => {
+  updateUser: async (req, resp, next) => {
     try {
       const { uid } = req.params;
       const { email, password, role } = req.body;
@@ -58,10 +58,10 @@ module.exports = {
 
       resp.status(200).json({ message: 'Usuário atualizado com sucesso', user });
     } catch (error) {
-      resp.status(500).json({ message: 'Aconteceu um erro no servidor, tente novamente mais tarde!' });
+      next(error);
     }
   },
-  deleteUser: async (req, resp) => {
+  deleteUser: async (req, resp, next) => {
     try {
       const { uid } = req.params;
       const user = await UserModel.findById(uid);
@@ -71,7 +71,7 @@ module.exports = {
       const deletedUser = await UserModel.findByIdAndDelete(uid);
       resp.status(200).json({ message: 'Usuário deletado com sucesso', user: deletedUser });
     } catch (error) {
-      resp.status(500).json({ message: 'Aconteceu um erro no servidor, tente novamente mais tarde!' });
+      next(error);
     }
   },
 };
