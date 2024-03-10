@@ -29,13 +29,13 @@ module.exports = {
         type,
       } = req.body;
 
-      if (!name) resp.status(422).json({ message: 'O nome é obrigatório.' });
-      if (!price) resp.status(422).json({ message: 'O preço é obrigatório.' });
-      if (!image) resp.status(422).json({ message: 'A imagem é obrigatória.' });
-      if (!type) resp.status(422).json({ message: 'O tipo não é obrigatório.' });
+      if (!name) resp.status(400).json({ message: 'O nome é obrigatório.' });
+      if (!price) resp.status(400).json({ message: 'O preço é obrigatório.' });
+      if (!image) resp.status(400).json({ message: 'A imagem é obrigatória.' });
+      if (!type) resp.status(400).json({ message: 'O tipo não é obrigatório.' });
 
       const productExists = await PoductModel.findOne({ name });
-      if (productExists) resp.status(422).json({ error: 'Produto já cadastrado.' });
+      if (productExists) resp.status(403).json({ error: 'Produto já cadastrado.' });
 
       const { _id, createdAt } = await PoductModel.create({
         name, price, image, type,
