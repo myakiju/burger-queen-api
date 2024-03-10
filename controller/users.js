@@ -26,14 +26,27 @@ module.exports = {
       const roles = ['admin', 'chef', 'waiter'];
       const { email, password, role } = req.body;
 
-      if (!email) resp.status(400).json({ error: 'O email é obrigatório.' });
-      if (!password) resp.status(400).json({ error: 'A senha é obrigatória.' });
-      if (!role) resp.status(400).json({ error: 'A função é obrigatória.' });
-      if (!roles.includes(role)) resp.status(400).json({ error: 'A função não é válida.' });
+      if (!email) {
+        return resp.status(400).json({ error: 'O email é obrigatório.' });
+      }
+
+      if (!password) {
+        return resp.status(400).json({ error: 'A senha é obrigatória.' });
+      }
+
+      if (!role) {
+        return resp.status(400).json({ error: 'A função é obrigatória.' });
+      }
+
+      if (!roles.includes(role)) {
+        return resp.status(400).json({ error: 'A função não é válida.' });
+      }
 
       const userExists = await UserModel.findOne({ email });
 
-      if (userExists) resp.status(403).json({ error: 'Usuário já cadastrado.' });
+      if (userExists) {
+        return resp.status(403).json({ error: 'Usuário já cadastrado.' });
+      }
 
       const salt = await bcrypt.genSalt(12);
       const passwordHash = await bcrypt.hash(password, salt);
@@ -51,10 +64,14 @@ module.exports = {
       const { email, password, role } = req.body;
 
       const roles = ['admin', 'chef', 'waiter'];
-      if (role && !roles.includes(role)) resp.status(422).json({ message: 'A função não é válida.' });
+      if (role && !roles.includes(role)) {
+        return resp.status(400).json({ error: 'A função não é válida.' });
+      }
 
       const user = await UserModel.findByIdAndUpdate(uid, { email, role, password });
-      if (!user) resp.status(404).json({ error: 'Usuário não encontrado.' });
+      if (!user) {
+        return resp.status(404).json({ error: 'Usuário não encontrado.' });
+      }
 
       const updatedUser = await UserModel.findById(uid, '_id email role');
 

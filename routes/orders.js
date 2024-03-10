@@ -2,6 +2,14 @@ const {
   requireAuth,
 } = require('../middleware/auth');
 
+const {
+  getOrders,
+  createOrder,
+  getOrderById,
+  updateOrder,
+  deleteOrder,
+} = require('../controller/orders');
+
 /** @module orders */
 module.exports = (app, nextMain) => {
   /**
@@ -25,8 +33,7 @@ module.exports = (app, nextMain) => {
    * @code {200} if authentication is successful
    * @code {401} if there is no authentication header
    */
-  app.get('/orders', requireAuth, (req, resp, next) => {
-  });
+  app.get('/orders', requireAuth, getOrders);
 
   /**
    * @name GET /orders/:orderId
@@ -49,8 +56,7 @@ module.exports = (app, nextMain) => {
    * @code {401} if there is no authentication header
    * @code {404} if the order with the specified `orderId` does not exist
    */
-  app.get('/orders/:orderId', requireAuth, (req, resp, next) => {
-  });
+  app.get('/orders/:orderId', requireAuth, getOrderById);
 
   /**
    * @name POST /orders
@@ -78,8 +84,7 @@ module.exports = (app, nextMain) => {
    * @code {400} if `userId` is not provided or attempting to create an order without products
    * @code {401} if there is no authentication header
    */
-  app.post('/orders', requireAuth, (req, resp, next) => {
-  });
+  app.post('/orders', requireAuth, createOrder);
 
   /**
    * @name PUT /orders/:orderId
@@ -109,8 +114,7 @@ module.exports = (app, nextMain) => {
    * @code {401} if there is no authentication header
    * @code {404} if the order with the specified `orderId` does not exist
    */
-  app.put('/orders/:orderId', requireAuth, (req, resp, next) => {
-  });
+  app.put('/orders/:orderId', requireAuth, updateOrder);
 
   /**
    * @name DELETE /orders/:orderId
@@ -133,8 +137,7 @@ module.exports = (app, nextMain) => {
    * @code {401} if there is no authentication header
    * @code {404} if the order with the specified `orderId` does not exist
    */
-  app.delete('/orders/:orderId', requireAuth, (req, resp, next) => {
-  });
+  app.delete('/orders/:orderId', requireAuth, deleteOrder);
 
   nextMain();
 };

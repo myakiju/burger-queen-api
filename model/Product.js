@@ -18,10 +18,14 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
+    quantity: {
+      type: Number,
+      required: false,
+    },
   },
   { timestamps: true },
 );
 
 const Product = model('Product', productSchema);
 
-module.exports = { Product };
+module.exports = { Product, productSchema };

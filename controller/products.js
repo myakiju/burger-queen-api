@@ -29,13 +29,26 @@ module.exports = {
         type,
       } = req.body;
 
-      if (!name) resp.status(422).json({ message: 'O nome é obrigatório.' });
-      if (!price) resp.status(422).json({ message: 'O preço é obrigatório.' });
-      if (!image) resp.status(422).json({ message: 'A imagem é obrigatória.' });
-      if (!type) resp.status(422).json({ message: 'O tipo não é obrigatório.' });
+      if (!name) {
+        return resp.status(400).json({ error: 'O nome do produto é obrigatório.' });
+      }
+
+      if (!price) {
+        return resp.status(400).json({ error: 'O preço do produto é obrigatório.' });
+      }
+
+      if (!image) {
+        return resp.status(400).json({ error: 'A imagem do produto é obrigatória.' });
+      }
+
+      if (!type) {
+        return resp.status(400).json({ error: 'O tipo do produto é obrigatório.' });
+      }
 
       const productExists = await PoductModel.findOne({ name });
-      if (productExists) resp.status(422).json({ error: 'Produto já cadastrado.' });
+      if (productExists) {
+        return resp.status(403).json({ error: 'Produto já cadastrado.' });
+      }
 
       const { _id, createdAt } = await PoductModel.create({
         name, price, image, type,
@@ -77,9 +90,9 @@ module.exports = {
   deleteProduct: async (req, resp, next) => {
     try {
       const { productId } = req.params;
-      const user = await PoductModel.findById(productId);
+      const product = await PoductModel.findById(productId);
 
-      if (!user) resp.status(404).json({ error: 'Produto não encontrado.' });
+      if (!product) resp.status(404).json({ error: 'Produto não encontrado.' });
 
       const {
         _id, name, price, image, type, createdAt,
