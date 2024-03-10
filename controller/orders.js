@@ -28,9 +28,17 @@ module.exports = {
         products,
       } = req.body;
 
-      if (!userId) resp.status(400).json({ message: 'O id do usuário obrigatório.' });
-      if (!client) resp.status(400).json({ message: 'O nome do cliente é obrigatório.' });
-      if (Array.isArray(products) && !products.length) resp.status(400).json({ message: 'A lista de produtos é obrigatória.' });
+      if (!userId) {
+        return resp.status(400).json({ error: 'O id do usuário é obrigatório.' });
+      }
+
+      if (!client) {
+        return resp.status(400).json({ error: 'O nome do cliente é obrigatório.' });
+      }
+
+      if (Array.isArray(products) && !products.length) {
+        return resp.status(400).json({ error: 'A lista de produtos é obrigatória.' });
+      }
 
       const { _id } = await OrderModel.create({
         userId, client, products, status: 'pending',
