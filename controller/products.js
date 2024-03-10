@@ -77,9 +77,9 @@ module.exports = {
   deleteProduct: async (req, resp, next) => {
     try {
       const { productId } = req.params;
-      const user = await PoductModel.findById(productId);
+      const product = await PoductModel.findById(productId);
 
-      if (!user) resp.status(404).json({ error: 'Produto não encontrado.' });
+      if (!product) resp.status(404).json({ error: 'Produto não encontrado.' });
 
       const {
         _id, name, price, image, type, createdAt,
