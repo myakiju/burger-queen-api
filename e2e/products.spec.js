@@ -26,8 +26,8 @@ describe('POST /products', () => {
       body: {
         name: 'Test',
         price: 5,
-        image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-        type: "Lunch"
+        image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+        type: 'Lunch',
       },
     })
       .then((resp) => {
@@ -111,8 +111,8 @@ describe('PUT /products/:productid', () => {
       body: {
         name: 'Test',
         price: 10,
-        image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-        type: "Lunch"
+        image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+        type: 'Lunch',
       },
     })
       .then((resp) => {
@@ -140,8 +140,8 @@ describe('PUT /products/:productid', () => {
       body: {
         name: 'Test',
         price: 10,
-        image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-        type: "Lunch"
+        image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+        type: 'Lunch',
       },
     })
       .then((resp) => {
@@ -188,8 +188,8 @@ describe('DELETE /products/:productid', () => {
       body: {
         name: 'Test',
         price: 10,
-        image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-        type: "Lunch"
+        image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+        type: 'Lunch',
       },
     })
       .then((resp) => {
@@ -211,8 +211,8 @@ describe('DELETE /products/:productid', () => {
       body: {
         name: 'Test',
         price: 10,
-        image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-        type: "Lunch"
+        image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+        type: 'Lunch',
       },
     })
       .then((resp) => {

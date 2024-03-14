@@ -32,8 +32,8 @@ describe('POST /orders', () => {
         body: {
           name: 'Test',
           price: 10,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -45,16 +45,16 @@ describe('POST /orders', () => {
       })
       .then(([product, user]) => fetchAsTestUser('/orders', {
         method: 'POST',
-        body: { 
+        body: {
           userId: user._id,
           client: 'client',
           products: [
             {
               qty: 5,
               product: { ...product },
-            }
+            },
           ],
-          status: "pending",
+          status: 'pending',
         },
       }))
       .then((resp) => {
@@ -79,8 +79,8 @@ describe('POST /orders', () => {
         body: {
           name: 'Test',
           price: 25,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -99,9 +99,9 @@ describe('POST /orders', () => {
             {
               qty: 5,
               product: { ...product },
-            }
+            },
           ],
-          status: "pending",          
+          status: 'pending',
         },
       }))
       .then((resp) => {
@@ -132,8 +132,8 @@ describe('GET /orders', () => {
         body: {
           name: 'Test',
           price: 10,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -154,9 +154,9 @@ describe('GET /orders', () => {
                 {
                   qty: 50,
                   product: { ...product },
-                }
+                },
               ],
-              status: "pending",              
+              status: 'pending',
             },
           }),
           fetchAsAdmin('/orders', {
@@ -168,9 +168,9 @@ describe('GET /orders', () => {
                 {
                   qty: 25,
                   product: { ...product },
-                }
+                },
               ],
-              status: "pending",              
+              status: 'pending',
             },
           }),
         ])
@@ -203,8 +203,8 @@ describe('GET /orders', () => {
         body: {
           name: 'Test',
           price: 10,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -225,9 +225,9 @@ describe('GET /orders', () => {
                 {
                   qty: 50,
                   product: { ...product },
-                }
+                },
               ],
-              status: "pending",               
+              status: 'pending',
             },
           }),
           fetchAsAdmin('/orders', {
@@ -239,9 +239,9 @@ describe('GET /orders', () => {
                 {
                   qty: 25,
                   product: { ...product },
-                }
+                },
               ],
-              status: "pending", 
+              status: 'pending',
             },
           }),
         ])
@@ -286,8 +286,8 @@ describe('GET /orders/:orderId', () => {
         body: {
           name: 'Test',
           price: 99,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -306,9 +306,9 @@ describe('GET /orders/:orderId', () => {
             {
               qty: 50,
               product: { ...product },
-            }
+            },
           ],
-          status: "pending",           
+          status: 'pending',
         },
       }))
       .then((resp) => {
@@ -334,8 +334,8 @@ describe('GET /orders/:orderId', () => {
         body: {
           name: 'Test',
           price: 99,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -354,9 +354,9 @@ describe('GET /orders/:orderId', () => {
             {
               qty: 50,
               product: { ...product },
-            }
+            },
           ],
-          status: "pending",           
+          status: 'pending',
         },
       }))
       .then((resp) => {
@@ -397,8 +397,8 @@ describe('PUT /orders/:orderId', () => {
         body: {
           name: 'Test',
           price: 99,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -417,9 +417,9 @@ describe('PUT /orders/:orderId', () => {
             {
               qty: 50,
               product: { ...product },
-            }
+            },
           ],
-          status: "pending",           
+          status: 'pending',
         },
       }))
       .then((resp) => {
@@ -439,8 +439,8 @@ describe('PUT /orders/:orderId', () => {
         body: {
           name: 'Test',
           price: 99,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -459,9 +459,9 @@ describe('PUT /orders/:orderId', () => {
             {
               qty: 50,
               product: { ...product },
-            }
+            },
           ],
-          status: "pending",           
+          status: 'pending',
         },
       }))
       .then((resp) => {
@@ -482,8 +482,8 @@ describe('PUT /orders/:orderId', () => {
         body: {
           name: 'Test',
           price: 99,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -495,16 +495,16 @@ describe('PUT /orders/:orderId', () => {
       })
       .then(([product, user]) => fetchAsTestUser('/orders', {
         method: 'POST',
-        body: { 
+        body: {
           userId: user._id,
           client: 'client',
           products: [
             {
               qty: 50,
               product: { ...product },
-            }
+            },
           ],
-          status: "pending",           
+          status: 'pending',
         },
       }))
       .then((resp) => {
@@ -532,8 +532,8 @@ describe('PUT /orders/:orderId', () => {
         body: {
           name: 'Test',
           price: 99,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -552,9 +552,9 @@ describe('PUT /orders/:orderId', () => {
             {
               qty: 50,
               product: { ...product },
-            }
+            },
           ],
-          status: "pending",           
+          status: 'pending',
         },
       }))
       .then((resp) => {
@@ -582,8 +582,8 @@ describe('PUT /orders/:orderId', () => {
         body: {
           name: 'Test',
           price: 99,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -602,9 +602,9 @@ describe('PUT /orders/:orderId', () => {
             {
               qty: 50,
               product: { ...product },
-            }
+            },
           ],
-          status: "pending",           
+          status: 'pending',
         },
       }))
       .then((resp) => {
@@ -647,8 +647,8 @@ describe('DELETE /orders/:orderId', () => {
         body: {
           name: 'Test',
           price: 99,
-          image: "https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg",
-          type: "Lunch"
+          image: 'https://github.com/Laboratoria/bootcamp/tree/main/projects/04-burger-queen-api/resources/images/water.jpg',
+          type: 'Lunch',
         },
       }),
       fetchAsTestUser('/users/test@test.test'),
@@ -667,9 +667,9 @@ describe('DELETE /orders/:orderId', () => {
             {
               qty: 50,
               product: { ...product },
-            }
+            },
           ],
-          status: "pending",           
+          status: 'pending',
         },
       }))
       .then((resp) => {

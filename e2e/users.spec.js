@@ -1,4 +1,6 @@
+// eslint-disable-next-line no-unused-vars
 const url = require('url');
+// eslint-disable-next-line no-unused-vars
 const qs = require('querystring');
 const config = require('../config');
 
@@ -113,7 +115,7 @@ describe('POST /users', () => {
       body: {
         email: 'test1@test.test',
         password: '12345',
-        role: "waiter",
+        role: 'waiter',
       },
     })
       .then((resp) => {
@@ -125,7 +127,7 @@ describe('POST /users', () => {
         expect(typeof json.email).toBe('string');
         expect(typeof json.password).toBe('undefined');
         expect(typeof json.role).toBe('string');
-        expect(json.role).toBe("waiter");
+        expect(json.role).toBe('waiter');
       })
   ));
 
@@ -135,7 +137,7 @@ describe('POST /users', () => {
       body: {
         email: 'admin1@test.test',
         password: '12345',
-        role: "admin",
+        role: 'admin',
       },
     })
       .then((resp) => {
@@ -147,7 +149,7 @@ describe('POST /users', () => {
         expect(typeof json.email).toBe('string');
         expect(typeof json.password).toBe('undefined');
         expect(typeof json.role).toBe('string');
-        expect(json.role).toBe("admin");
+        expect(json.role).toBe('admin');
       })
   ));
 
@@ -184,7 +186,7 @@ describe('PUT /users/:uid', () => {
   it('should fail with 403 when not admin tries to change own role', () => (
     fetchAsTestUser('/users/test@test.test', {
       method: 'PUT',
-      body: { role: "admin" },
+      body: { role: 'admin' },
     })
       .then((resp) => expect(resp.status).toBe(403))
   ));
