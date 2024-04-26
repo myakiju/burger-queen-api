@@ -17,7 +17,6 @@
     "docs:deploy": "rm -rf docs && npm run docs:generate && gh-pages -d docs"
   },
   "dependencies": {
-    "@netlify/functions": "^2.6.0",
     "@shelf/jest-mongodb": "^4.1.7",
     "@types/express": "^4.17.21",
     "bcrypt": "^5.0.1",
@@ -27,9 +26,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb-memory-server": "^8.12.2",
     "mongoose": "^8.2.0",
-    "netlify-cli": "^17.23.0",
-    "netlify-lambda": "^2.0.16",
-    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
