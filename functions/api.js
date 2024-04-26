@@ -10,9 +10,9 @@ const { connect } = require('../connect');
 
 const { port, secret } = config;
 const app = express();
-const router = express.Router();
+// const router = express.Router();
 
-app.use('/.netlify/functions/api', router);
+// app.use('/.netlify/functions/api', router);
 
 app.use(cors());
 app.set('config', config);
