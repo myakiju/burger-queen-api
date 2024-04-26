@@ -14,8 +14,7 @@
     "test": "npm run test:e2e && npm run test:unit",
     "lint": "eslint --fix .",
     "docs:generate": "jsdoc -c jsdoc.conf --readme README-docs.md",
-    "docs:deploy": "rm -rf docs && npm run docs:generate && gh-pages -d docs",
-    "build": "netlify deploy --prod"
+    "docs:deploy": "rm -rf docs && npm run docs:generate && gh-pages -d docs"
   },
   "dependencies": {
     "@netlify/functions": "^2.6.0",
