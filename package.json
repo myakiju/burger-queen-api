@@ -14,7 +14,8 @@
     "test": "npm run test:e2e && npm run test:unit",
     "lint": "eslint --fix .",
     "docs:generate": "jsdoc -c jsdoc.conf --readme README-docs.md",
-    "docs:deploy": "rm -rf docs && npm run docs:generate && gh-pages -d docs"
+    "docs:deploy": "rm -rf docs && npm run docs:generate && gh-pages -d docs",
+    "build": "netlify deploy --prod"
   },
   "dependencies": {
     "@netlify/functions": "^2.6.0",
@@ -27,6 +28,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb-memory-server": "^8.12.2",
     "mongoose": "^8.2.0",
+    "netlify-cli": "^17.23.0",
+    "netlify-lambda": "^2.0.16",
     "serverless-http": "^3.2.0"
   },
   "devDependencies": {
@@ -42,5 +45,8 @@
     "node-fetch": "^3.1.0",
     "nodemon": "^3.1.0",
     "tree-kill": "^1.2.2"
-  }
+  },
+  "description": "## Índice",
+  "keywords": [],
+  "author": ""
 }
